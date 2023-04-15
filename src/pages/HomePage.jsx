@@ -30,7 +30,7 @@ const HomePage = () => {
       }
 
     useEffect(() => { 
-        fetch("https://exam.avavion.ru/api/services") 
+        fetch("https://flowers.avavion.ru/api/products") 
           .then((response) => response.json()) // преобразование в json формат для чтения 
           .then((data) => { 
             setItems(data.data) // запись в основной массив 
@@ -50,14 +50,22 @@ const HomePage = () => {
     return (
         <>
 
+        <div className="items_Header">
+
+            <div className="sort">
+
+                <button className="button_Sort" onClick={sortByPriceIncrease}>По возрастанию цены</button> 
+                <button className="button_Sort" onClick={sortByPriceDecrease}>По убыванию цены</button> 
+                <button className="button_Sort" onClick={resetSort}>Сбросить сортировку</button>
+
+            </div>
+
             <form className="search-form">
                 <input value={query} onChange={(e) => onChangeQuery(e)} id="search" type="text" name="search" placeholder="Поиск..."></input>
                 <button type="submit">Найти</button>
             </form>
 
-            <button onClick={sortByPriceIncrease}>По возрастанию цены</button> 
-            <button onClick={sortByPriceDecrease}>По убыванию цены</button> 
-            <button onClick={resetSort}>Сбросить сортировку</button>
+        </div>
 
             <div className="items">
 
@@ -67,9 +75,10 @@ const HomePage = () => {
                             <>
                                 <div className="item">
 
-                                <img src={item.image_url} alt="" />
+                                <img src={item.preview_image} alt="" />
                                 <h2>{item.name}</h2>
-                                <p>{item.price}</p>
+                                <p>{item.price} ℗</p>
+                                <p>{item.tag}</p>
                                 <NavLink className="button_Link" to={`/article/${item.id}`}>Перейти к продукту</NavLink>
 
                                 </div>

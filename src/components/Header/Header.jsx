@@ -6,15 +6,13 @@ const Header = () => {
 
   return (
     <>
-    <div className="header">
 
         <NavLink className="logo" to={`/`}>
             <img src={logo} alt="" />
         </NavLink>
 
-        <NavLink className="button_Link" to={`/form`}>Добавить новый продукт</NavLink>
+        <NavLink className="button_Link" to={`/form`}>Заказать букет</NavLink>
 
-    </div>
     </>
   )
 }

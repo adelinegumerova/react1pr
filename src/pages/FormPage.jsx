@@ -7,18 +7,16 @@ const FormPage = () => {
     const [form, setForm] = useState({
         email: "",
         full_name: "",
+        address: "",
         message: "",
-        service_id: 1 
+        product_id: 1 
     });
 
     const onChangeSelect = (e) => {
-        setForm((prevState) => {
-            prevState = { ...prevState };
-
-            prevState[e.target.name] = parseInt(e.target.value);
-
-            return prevState;
-        });
+        setForm((prevState) => ({
+            ...prevState,
+            [e.target.name]: parseInt(e.target.value)
+        }));
     }
 
     const onChangeForm = (e) => {
@@ -31,10 +29,26 @@ const FormPage = () => {
         });
     }
 
+    // const sendRequest = async (body) => {
+    //     const response = await fetch("https://flowers.avavion.ru/api/applications/create", {
+    //         method: "POST",
+    //         mode: "cors",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Accept': 'application/json'
+    //         },
+    //         body: JSON.stringify(body),
+    //     });
+
+    //     const data = await response.json();
+
+    //     return data;
+    // };
+
     const send = (e) => {
         e.preventDefault();
 
-        fetch("https://exam.avavion.ru/api/requests/create", {
+        fetch("https://flowers.avavion.ru/api/applications/create", {
             method: "POST",
             body: JSON.stringify(form),
             headers: {
@@ -45,7 +59,7 @@ const FormPage = () => {
     };
 
     useEffect(() => {
-        fetch("https://exam.avavion.ru/api/services")
+        fetch("https://flowers.avavion.ru/api/products")
         .then((r) => r.json())
         .then((data) => setItems(data.data))
     }, []);
@@ -54,20 +68,24 @@ const FormPage = () => {
     <>
         <form className="product-form">
         <div className="form-group">
-            <label htmlFor="email">Почта</label>
+            <label htmlFor="email">Почта:</label>
             <input onChange={(e) => onChangeForm(e)} type="email" id="email" name="email" required></input>
         </div>
         <div className="form-group">
-            <label htmlFor="full_name">Имя и Фамилия</label>
+            <label htmlFor="full_name">Имя и Фамилия:</label>
             <input onChange={(e) => onChangeForm(e)} type="text" id="name" name="full_name" required></input>
         </div>
         <div className="form-group">
-            <label htmlFor="message">Сообщение</label>
+            <label htmlFor="message">Сообщение:</label>
             <textarea onChange={(e) => onChangeForm(e)} id="message" name="message" required></textarea>
         </div>
         <div className="form-group">
-            <label htmlFor="category">Категория</label>
-            <select id="service_id" name="service_id" required onChange={onChangeSelect}>
+            <label htmlFor="message">Адрес:</label>
+            <input onChange={(e) => onChangeForm(e)} id="address" name="address" required></input>
+        </div>
+        <div className="form-group">
+            <label htmlFor="product">Продукт:</label>
+            <select id="product_id" name="product_id" required onChange={onChangeSelect}>
                 {item.map((item) => {
                     return (
                         <option key={item.id} value={item.id}>
@@ -77,7 +95,7 @@ const FormPage = () => {
                 })}
             </select>
         </div>
-        <button onClick={(e) => send(e)} type="submit">Добавить продукт</button>
+        <button onClick={(e) => send(e)} type="submit">Отправить заявку</button>
         </form>
     </>
   )
