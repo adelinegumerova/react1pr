@@ -9,9 +9,9 @@ const SinglePage = () => {
     const [item, setItems] = useState({});
 
     useEffect(() => {
-        fetch(`https://flowers.avavion.ru/api/products/${params.id}`)
+        fetch(`https://646bafb47d3c1cae4ce42749.mockapi.io/Projects/${params.id}`)
         .then((r) => r.json())
-        .then((data) => setItems(data.data))
+        .then((data) => setItems(data))
     }, []);
 
   return (
@@ -21,13 +21,12 @@ const SinglePage = () => {
 
         <div className="item_Single">
 
-        <img src={item.preview_image} alt="" />
+        <img src={item.photo} alt="" />
 
           <div className="item_Body">
 
-            <h2>{item.name}</h2>
-            <p>{item.text}</p>
-            <p className='price'> Цена: {item.price} ℗</p>
+            <h2>{item.title}</h2>
+            <p>{item.skills}</p>
             <button className='button_Add'>Купить</button>
 
           </div>

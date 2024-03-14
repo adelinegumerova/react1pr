@@ -11,7 +11,7 @@ const HomePage = () => {
         // Копируем массив товаров 
         const sortedItems = [...items]; 
         // Сортируем услугами по возрастанию цены 
-        sortedItems.sort((a, b) => a.price > b.price ? 1 : -1);  
+        sortedItems.sort((a, b) => a.title > b.title ? 1 : -1);  
         // Обновляем состояние, чтобы перерендерить компонент со вновь отсортированными услугами 
         setItems(sortedItems); 
     };
@@ -20,7 +20,7 @@ const HomePage = () => {
         // Копируем массив товаров 
         const sortedItems = [...items]; 
         // Сортируем услугами по возрастанию цены 
-        sortedItems.sort((a, b) => a.price < b.price ? 1 : -1);  
+        sortedItems.sort((a, b) => a.title < b.title ? 1 : -1);  
         // Обновляем состояние, чтобы перерендерить компонент со вновь отсортированными услугами 
         setItems(sortedItems); 
       };
@@ -30,17 +30,17 @@ const HomePage = () => {
       }
 
     useEffect(() => { 
-        fetch("https://flowers.avavion.ru/api/products") 
+        fetch("https://646bafb47d3c1cae4ce42749.mockapi.io/Projects") 
           .then((response) => response.json()) // преобразование в json формат для чтения 
           .then((data) => { 
-            setItems(data.data) // запись в основной массив 
-            setInitialItems(data.data) // запись в копию массива для сброса 
+            setItems(data) // запись в основной массив 
+            setInitialItems(data) // запись в копию массива для сброса 
           }); // запись в массив всех предметов 
       }, []);
 
     const [query, setQuery] = useState("");
 
-    const filteredItems = items.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
+    const filteredItems = items.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()));
   
     const onChangeQuery = (event) => {
         setQuery(event.target.value);
@@ -75,10 +75,9 @@ const HomePage = () => {
                             <>
                                 <div className="item">
 
-                                <img src={item.preview_image} alt="" />
-                                <h2>{item.name}</h2>
-                                <p>{item.price} ℗</p>
-                                <p>{item.tag}</p>
+                                <img src={item.preview} alt="" />
+                                <h2>{item.title}</h2>
+                                <p>{item.skills} ℗</p>
                                 <NavLink className="button_Link" to={`/article/${item.id}`}>Перейти к продукту</NavLink>
 
                                 </div>
