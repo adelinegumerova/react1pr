@@ -9,7 +9,7 @@ const SinglePage = () => {
     const [item, setItems] = useState({});
 
     useEffect(() => {
-        fetch(`https://646bafb47d3c1cae4ce42749.mockapi.io/Projects/${params.id}`)
+        fetch(`https://646bafb47d3c1cae4ce42749.mockapi.io/products/${params.id}`)
         .then((r) => r.json())
         .then((data) => setItems(data))
     }, []);
@@ -26,7 +26,7 @@ const SinglePage = () => {
           <div className="item_Body">
 
             <h2>{item.title}</h2>
-            <p>{item.skills}</p>
+            <p>{item.description}</p>
             <button className='button_Add'>Купить</button>
 
           </div>

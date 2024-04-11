@@ -11,7 +11,7 @@ const HomePage = () => {
         // Копируем массив товаров 
         const sortedItems = [...items]; 
         // Сортируем услугами по возрастанию цены 
-        sortedItems.sort((a, b) => a.title > b.title ? 1 : -1);  
+        sortedItems.sort((a, b) => a.price > b.price ? 1 : -1);  
         // Обновляем состояние, чтобы перерендерить компонент со вновь отсортированными услугами 
         setItems(sortedItems); 
     };
@@ -20,7 +20,7 @@ const HomePage = () => {
         // Копируем массив товаров 
         const sortedItems = [...items]; 
         // Сортируем услугами по возрастанию цены 
-        sortedItems.sort((a, b) => a.title < b.title ? 1 : -1);  
+        sortedItems.sort((a, b) => a.price < b.price ? 1 : -1);  
         // Обновляем состояние, чтобы перерендерить компонент со вновь отсортированными услугами 
         setItems(sortedItems); 
       };
@@ -30,7 +30,7 @@ const HomePage = () => {
       }
 
     useEffect(() => { 
-        fetch("https://646bafb47d3c1cae4ce42749.mockapi.io/Projects") 
+        fetch("https://646bafb47d3c1cae4ce42749.mockapi.io/products") 
           .then((response) => response.json()) // преобразование в json формат для чтения 
           .then((data) => { 
             setItems(data) // запись в основной массив 
@@ -76,8 +76,9 @@ const HomePage = () => {
                                 <div className="item">
 
                                 <img src={item.preview} alt="" />
-                                <h2>{item.title}</h2>
-                                <p>{item.skills} ℗</p>
+                                <h2>Название: {item.title}</h2>
+                                <p>Цена: {item.price} ℗</p>
+                                <p>Количество: {item.quantity}</p>
                                 <NavLink className="button_Link" to={`/article/${item.id}`}>Перейти к продукту</NavLink>
 
                                 </div>

@@ -3,7 +3,6 @@ import Root from "../pages/Root";
 import HomePage from "../pages/HomePage";
 import React from "react";
 import SinglePage from "../pages/SinglePage";
-import FormPage from "../pages/FormPage";
 
 const router = createBrowserRouter([
     {
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
                 path: "/article/:id",
                 element: <SinglePage />
             },
-            {
-                path: "/form",
-                element: <FormPage />
-            }
         ]
     }
 ])

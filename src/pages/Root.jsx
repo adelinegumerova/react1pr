@@ -6,7 +6,7 @@ import Header from '../components/Header/Header';
 const Root = () => {
 
     useEffect(() => {
-        document.title = "Flowers Store";
+        document.title = "Adelina";
       }, []);
 
     return (
